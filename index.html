@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="PontUau - Previsão Inteligente de Atraso de Voos usando Machine Learning. Projeto desenvolvido pela equipe Araras Selvagens no Hackathon Alura + No Country.">
+    <title>PontUau - Previsão Inteligente de Atraso de Voos</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="gradient-overlay"></div>
+            <div class="animated-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                <span class="gradient-text">PontUau</span>
+                <br>Previsão Inteligente de Atraso de Voos
+            </h1>
+
+            <p class="hero-subtitle">
+                Modelos de Machine Learning treinados para antecipar atrasos e apoiar decisões estratégicas
+            </p>
+
+            <div class="hero-features">
+                <div class="feature-pill">
+                    <i class="fas fa-server"></i>
+                    <span>Back-end (Java, Spring, APIs REST, persistência)</span>
+                </div>
+                <div class="feature-pill">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Data Science (Python, Pandas, scikit-learn, modelagem supervisionada)</span>
+                </div>
+            </div>
+
+            <div class="partner-logos">
+                <div class="partner-logo">
+                    <img src="Imagens/alura-logo.png" alt="Alura">
+                    <span>Cursos & Formação</span>
+                </div>
+                <div class="partner-logo">
+                    <img src="Imagens/nocountry-logo.png" alt="No Country">
+                    <span>Hackathon</span>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hackathon Section -->
+    <section class="hackathon-section" id="hackathon">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Inovação & Aprendizado</span>
+                <h2 class="section-title">Projeto desenvolvido em Hackathon</h2>
+                <p class="section-description">
+                    Uma parceria educacional com aplicação prática em tecnologia
+                </p>
+            </div>
+
+            <div class="hackathon-grid">
+                <div class="hackathon-card">
+                    <div class="card-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Parceria Estratégica</h3>
+                    <p>Desenvolvido durante o Hackathon promovido pela <strong>Alura</strong> em parceria com a
+                        <strong>No Country</strong>, unindo educação e inovação tecnológica.
+                    </p>
+                </div>
+
+                <div class="hackathon-card">
+                    <div class="card-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Caráter Educacional</h3>
+                    <p>Projeto com foco em aprendizado prático, aplicando conceitos avançados de Data Science e
+                        Engenharia de Software em um cenário real.</p>
+                </div>
+
+                <div class="hackathon-card">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Boas Práticas</h3>
+                    <p>Implementação seguindo as melhores práticas de desenvolvimento, versionamento, documentação e
+                        arquitetura de software moderna.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We're Building Section -->
+    <section class="building-section" id="solucao">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossa Solução</span>
+                <h2 class="section-title">O que estamos construindo</h2>
+                <p class="section-description">
+                    Uma solução completa de previsão de atrasos baseada em inteligência artificial
+                </p>
+            </div>
+
+            <div class="building-grid">
+                <div class="building-card">
+                    <div class="card-icon-large">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Modelo de Classificação</h3>
+                    <p>Sistema de classificação binária que determina se um voo será <strong>Pontual</strong> ou
+                        <strong>Atrasado</strong>, com alta precisão e confiabilidade.
+                    </p>
+                    <div class="card-badge">Machine Learning</div>
+                </div>
+
+                <div class="building-card">
+                    <div class="card-icon-large">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3>Probabilidade Associada</h3>
+                    <p>Além da classificação, o modelo retorna a <strong>probabilidade estimada</strong> da previsão,
+                        permitindo análise de risco mais detalhada.</p>
+                    <div class="card-badge">Análise Preditiva</div>
+                </div>
+
+                <div class="building-card">
+                    <div class="card-icon-large">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Dados Históricos</h3>
+                    <p>Treinamento baseado em <strong>dados históricos reais</strong> de voos nacionais, garantindo
+                        previsões fundamentadas em padrões identificados.</p>
+                    <div class="card-badge">Big Data</div>
+                </div>
+
+                <div class="building-card">
+                    <div class="card-icon-large">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Integração API REST</h3>
+                    <p>Arquitetura preparada para integração futura com <strong>API REST desenvolvida em Java (Spring
+                            Boot)</strong>, garantindo escalabilidade.</p>
+                    <div class="card-badge">Spring Boot</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Team Section -->
+    <section class="team-section" id="equipe">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Conheça o Time</span>
+                <h2 class="section-title">Equipe Araras Selvagens</h2>
+                <p class="section-description">
+                    Profissionais dedicados unindo Data Science e Engenharia de Software
+                </p>
+            </div>
+
+            <!-- Data Science Team -->
+            <div class="team-category">
+                <div class="category-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Data Science</h3>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Gabriel Schineider.png" alt="Gabriel Schineider">
+                        </div>
+                        <h4 class="member-name">Gabriel Schineider</h4>
+                        <p class="member-role">Data Scientist</p>
+                        <div class="member-links">
+                            <a href="https://github.com/gabriel-schineider/" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/gabriel-schineider/" class="social-link"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Gleice Araújo.jpg" alt="Gleice Araújo">
+                        </div>
+                        <h4 class="member-name">Gleice Araújo</h4>
+                        <p class="member-role">Data Scientist</p>
+                        <div class="member-links">
+                            <a href="https://github.com/GleiceAraujo22" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/gleicearaujo/" class="social-link"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Wellington Gabriel.png" alt="Wellington Gabriel">
+                        </div>
+                        <h4 class="member-name">Wellington Gabriel</h4>
+                        <p class="member-role">Data Scientist</p>
+                        <div class="member-links">
+                            <a href="https://github.com/WellingtonGabriel20" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/wellingtongabriel20" class="social-link"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Cristiano Silveira.jpg" alt="Cristiano Silveira">
+                        </div>
+                        <h4 class="member-name">Cristiano Silveira</h4>
+                        <p class="member-role">Data Scientist</p>
+                        <div class="member-links">
+                            <a href="https://github.com/realcsilveira" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/realcsilveira" class="social-link"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Arley Ribeiro.jpg" alt="Arley Ribeiro">
+                        </div>
+                        <h4 class="member-name">Arley Ribeiro</h4>
+                        <p class="member-role">Data Scientist</p>
+                        <div class="member-links">
+                            <a href="https://github.com/ribeiroarley" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/ribeiroarley" class="social-link" aria-label="LinkedIn"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backend Team -->
+            <div class="team-category">
+                <div class="category-header">
+                    <i class="fas fa-code"></i>
+                    <h3>Back-end Development</h3>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Bruno Henrique.jpg" alt="Bruno Henrique">
+                        </div>
+                        <h4 class="member-name">Bruno Henrique</h4>
+                        <p class="member-role">Back-end Developer</p>
+                        <div class="member-links">
+                            <a href="https://github.com/Bruno-bandeirah" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/bruno-bandeira-dev/" class="social-link"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Rafael Vieira.jpg" alt="Rafael Vieira">
+                        </div>
+                        <h4 class="member-name">Rafael Vieira</h4>
+                        <p class="member-role">Back-end Developer</p>
+                        <div class="member-links">
+                            <a href="https://github.com/Rafael-LynX" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/rafaelvieira-cyber/" class="social-link"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Richard Silva.jpg" alt="Richard Silva">
+                        </div>
+                        <h4 class="member-name">Richard Silva</h4>
+                        <p class="member-role">Back-end Developer</p>
+                        <div class="member-links">
+                            <a href="https://github.com/RichardFFreitas" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/richard-freitas-dev/" class="social-link"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <img src="Imagens/Juciano Gomes.jpg" alt="Juciano Gomes">
+                        </div>
+                        <h4 class="member-name">Juciano Gomes</h4>
+                        <p class="member-role">Back-end Developer</p>
+                        <div class="member-links">
+                            <a href="https://github.com/Jucianogp" class="social-link" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/juciano-gomes-921830282" class="social-link"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4 class="member-name">Matheus Vinícius</h4>
+                        <p class="member-role">Back-end Developer</p>
+                        <div class="member-links">
+                            <a href="#" class="social-link" aria-label="GitHub" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="LinkedIn" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="gradient-text">PontUau</h3>
+                    <p>Previsão inteligente baseada em treinamento de Machine Learning</p>
+                </div>
+
+                <div class="footer-info">
+                    <p class="footer-text">
+                        Projeto <strong>PontUau</strong> — desenvolvido pela equipe <strong>Araras Selvagens</strong>
+                        <br>durante o Hackathon Alura + No Country
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 PontUau. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#home">Início</a>
+                    <a href="#hackathon">Hackathon</a>
+                    <a href="#solucao">Solução</a>
+                    <a href="#equipe">Equipe</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
