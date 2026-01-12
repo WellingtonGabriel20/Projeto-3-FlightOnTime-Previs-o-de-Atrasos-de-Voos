@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de Previsão de Atraso de Voos - PontUau">
+    <title>Calculadora de Previsão - PontUau</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="Imagens/arara selvagem.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="calculator.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="Imagens/arara selvagem.jpg" alt="Araras Selvagens" class="logo-image">
+                <div class="logo-text">
+                    <span class="gradient-text">PontUau</span>
+                    <span class="team-name">Equipe Araras Selvagens</span>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="index.html#home">Início</a>
+                <a href="index.html#parceiros">Parceiros</a>
+                <a href="index.html#equipe">Equipe</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-header">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Voltar</span>
+                </a>
+                <h1 class="page-title page-title-small">
+                    <span class="gradient-text">Calculadora de Previsão</span>
+                </h1>
+                <p class="page-subtitle">
+                    Preencha os dados do voo para calcular a probabilidade de atraso
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <!-- Form -->
+                <div class="calculator-form">
+                    <form id="predictionForm">
+                        <div class="form-section">
+                            <h3><i class="fas fa-plane"></i> Informações do Voo</h3>
+
+                            <div class="form-group">
+                                <label for="companhia">
+                                    <i class="fas fa-building"></i>
+                                    Companhia Aérea
+                                </label>
+                                <select id="companhia" name="companhia" required>
+                                    <option value="">Selecione a companhia</option>
+                                    <option value="G3">G3 - Gol</option>
+                                    <option value="AD">AD - Azul</option>
+                                    <option value="LA">LA - LATAM</option>
+                                    <option value="AZ">AZ - Avianca</option>
+                                    <option value="TP">TP - TAP</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="origem">
+                                        <i class="fas fa-plane-departure"></i>
+                                        Aeroporto de Origem
+                                    </label>
+                                    <select id="origem" name="origem" required>
+                                        <option value="">Selecione a origem</option>
+                                        <option value="GRU">GRU - São Paulo (Guarulhos)</option>
+                                        <option value="GIG">GIG - Rio de Janeiro (Galeão)</option>
+                                        <option value="BSB">BSB - Brasília</option>
+                                        <option value="CGH">CGH - São Paulo (Congonhas)</option>
+                                        <option value="SDU">SDU - Rio de Janeiro (Santos Dumont)</option>
+                                        <option value="CNF">CNF - Belo Horizonte (Confins)</option>
+                                        <option value="SSA">SSA - Salvador</option>
+                                        <option value="FOR">FOR - Fortaleza</option>
+                                        <option value="REC">REC - Recife</option>
+                                        <option value="POA">POA - Porto Alegre</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="destino">
+                                        <i class="fas fa-plane-arrival"></i>
+                                        Aeroporto de Destino
+                                    </label>
+                                    <select id="destino" name="destino" required>
+                                        <option value="">Selecione o destino</option>
+                                        <option value="GRU">GRU - São Paulo (Guarulhos)</option>
+                                        <option value="GIG">GIG - Rio de Janeiro (Galeão)</option>
+                                        <option value="BSB">BSB - Brasília</option>
+                                        <option value="CGH">CGH - São Paulo (Congonhas)</option>
+                                        <option value="SDU">SDU - Rio de Janeiro (Santos Dumont)</option>
+                                        <option value="CNF">CNF - Belo Horizonte (Confins)</option>
+                                        <option value="SSA">SSA - Salvador</option>
+                                        <option value="FOR">FOR - Fortaleza</option>
+                                        <option value="REC">REC - Recife</option>
+                                        <option value="POA">POA - Porto Alegre</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="distancia_km">
+                                    <i class="fas fa-route"></i>
+                                    Distância (km)
+                                </label>
+                                <input type="number" id="distancia_km" name="distancia_km" placeholder="Ex: 350" min="1"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3><i class="fas fa-calendar-alt"></i> Data e Horário</h3>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="data_partida">
+                                        <i class="fas fa-calendar"></i>
+                                        Data de Partida
+                                    </label>
+                                    <input type="date" id="data_partida" name="data_partida" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="hora_partida">
+                                        <i class="fas fa-clock"></i>
+                                        Horário de Partida
+                                    </label>
+                                    <input type="time" id="hora_partida" name="hora_partida" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alta_temporada">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Alta Temporada
+                                </label>
+                                <select id="alta_temporada" name="alta_temporada" required>
+                                    <option value="">Selecione</option>
+                                    <option value="SIM">Sim</option>
+                                    <option value="NÃO">Não</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-button">
+                            <i class="fas fa-calculator"></i>
+                            <span>Calcular Previsão</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="gradient-text">PontUau</h3>
+                    <p>Previsão inteligente baseada em Machine Learning</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PontUau - Equipe Araras Selvagens</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="calculator.js"></script>
+</body>
+
+</html>

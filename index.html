@@ -8,6 +8,9 @@
         content="PontUau - Previsão Inteligente de Atraso de Voos usando Machine Learning. Projeto desenvolvido pela equipe Araras Selvagens no Hackathon Alura + No Country.">
     <title>PontUau - Previsão Inteligente de Atraso de Voos</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="Imagens/arara selvagem.jpg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +25,23 @@
 </head>
 
 <body>
+    <!-- Sticky Header -->
+    <header class="sticky-header">
+        <div class="container">
+            <a href="#home" class="header-logo">
+                <img src="Imagens/arara selvagem.jpg" alt="Araras Selvagens" class="header-logo-image">
+                <span class="gradient-text">PontUau</span>
+            </a>
+            <nav class="header-nav">
+                <a href="#home">Início</a>
+                <a href="#hackathon">Hackathon</a>
+                <a href="#parceiros">Parceiros</a>
+                <a href="#solucao">Solução</a>
+                <a href="#equipe">Equipe</a>
+            </nav>
+        </div>
+    </header>
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-background">
@@ -34,10 +54,13 @@
         </div>
 
         <div class="container hero-content">
-            <h1 class="hero-title">
+            <div class="title-container">
+                <img src="Imagens/arara selvagem.jpg" alt="Araras Selvagens" class="hero-logo-image">
                 <span class="gradient-text">PontUau</span>
-                <br>Previsão Inteligente de Atraso de Voos
-            </h1>
+                <p class="hero-team-name">Equipe Araras Selvagens</p>
+            </div>
+
+            <h2 class="hero-subtitle-title">Previsão Inteligente de Atraso de Voos</h2>
 
             <p class="hero-subtitle">
                 Modelos de Machine Learning treinados para antecipar atrasos e apoiar decisões estratégicas
@@ -54,16 +77,10 @@
                 </div>
             </div>
 
-            <div class="partner-logos">
-                <div class="partner-logo">
-                    <img src="Imagens/alura-logo.png" alt="Alura">
-                    <span>Cursos & Formação</span>
-                </div>
-                <div class="partner-logo">
-                    <img src="Imagens/nocountry-logo.png" alt="No Country">
-                    <span>Hackathon</span>
-                </div>
-            </div>
+            <a href="calculator.html" class="cta-button">
+                <span>Calcular Previsão de Voo</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
 
             <div class="scroll-indicator">
                 <i class="fas fa-chevron-down"></i>
@@ -110,6 +127,66 @@
                     <p>Implementação seguindo as melhores práticas de desenvolvimento, versionamento, documentação e
                         arquitetura de software moderna.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners-section" id="parceiros">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossos Parceiros</span>
+                <h2 class="section-title">Empresas que Tornaram Este Projeto Possível</h2>
+                <p class="section-description">
+                    Agradecemos às organizações que apoiaram nossa jornada de aprendizado e inovação
+                </p>
+            </div>
+
+            <div class="partners-grid">
+                <a href="https://www.oracle.com/br/education/oracle-next-education/" class="partner-card"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="partner-card-inner">
+                        <div class="partner-logo-large">
+                            <img src="Imagens/oracle-logo.png" alt="Oracle">
+                        </div>
+                        <h3>Oracle</h3>
+                        <p>Programa Oracle Next Education (ONE) - Educação em tecnologia</p>
+                        <div class="partner-link">
+                            <span>Saiba mais</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.alura.com.br/como-funciona" class="partner-card" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="partner-card-inner">
+                        <div class="partner-logo-large">
+                            <img src="Imagens/Alura-Logo.png" alt="Alura">
+                        </div>
+                        <h3>Alura</h3>
+                        <p>Plataforma de cursos online e formação em tecnologia</p>
+                        <div class="partner-link">
+                            <span>Saiba mais</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://talent.nocountry.tech/dashboard" class="partner-card" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="partner-card-inner">
+                        <div class="partner-logo-large">
+                            <img src="Imagens/nocountry-logo.png" alt="No Country">
+                        </div>
+                        <h3>No Country</h3>
+                        <p>Hackathon e desenvolvimento de projetos colaborativos</p>
+                        <div class="partner-link">
+                            <span>Saiba mais</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -175,8 +252,13 @@
     <section class="team-section" id="equipe">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Conheça o Time</span>
-                <h2 class="section-title">Equipe Araras Selvagens</h2>
+                <div class="section-header-with-logo">
+                    <img src="Imagens/arara selvagem.jpg" alt="Araras Selvagens" class="section-logo">
+                    <div>
+                        <span class="section-tag">Conheça o Time</span>
+                        <h2 class="section-title">Equipe Araras Selvagens</h2>
+                    </div>
+                </div>
                 <p class="section-description">
                     Profissionais dedicados unindo Data Science e Engenharia de Software
                 </p>
@@ -406,6 +488,7 @@
                 <div class="footer-links">
                     <a href="#home">Início</a>
                     <a href="#hackathon">Hackathon</a>
+                    <a href="#parceiros">Parceiros</a>
                     <a href="#solucao">Solução</a>
                     <a href="#equipe">Equipe</a>
                 </div>
