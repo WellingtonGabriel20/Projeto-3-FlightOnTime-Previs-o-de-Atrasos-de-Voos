@@ -61,6 +61,11 @@ html {
     scroll-behavior: smooth;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
 body {
     font-family: var(--font-primary);
     background-color: var(--dark-bg);
@@ -157,11 +162,12 @@ body {
 
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: max(600px, 85vh);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: 100px 0 60px;
 }
 
 .hero-background {
