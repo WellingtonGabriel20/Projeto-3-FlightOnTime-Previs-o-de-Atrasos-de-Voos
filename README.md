@@ -72,6 +72,75 @@ A calculadora de previsão está integrada com a API real de Machine Learning de
 https://github.com/Bruno-BandeiraH/flight-prediction-model
 ```
 
+### 🔄 Fluxo de Dados Completo
+
+Entenda como funciona o processo desde o preenchimento do formulário até a exibição do resultado:
+
+```
+┌─────────────────┐
+│   USUÁRIO       │
+│  Preenche form  │
+│  (Azul, GRU→GIG)│
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────────────────┐
+│  FRONT-END (calculator.js)          │
+│  1. Coleta dados do formulário      │
+│  2. Converte IATA → ICAO            │
+│     • Azul (AD) → AZU               │
+│     • GRU → SBGR, GIG → SBGL        │
+│  3. Calcula tempo de voo            │
+│  4. Formata data/hora               │
+└────────┬────────────────────────────┘
+         │
+         │ POST /predict
+         │ {
+         │   "icao_empresa": "AZU",
+         │   "icao_aerodromo_origem": "SBGR",
+         │   "icao_aerodromo_destino": "SBGL",
+         │   "partida_prevista": "12-11-2025T22:30:00",
+         │   "tempo_voo_estimado_hr": 0.44,
+         │   "distancia_km": 350.0
+         │ }
+         ▼
+┌─────────────────────────────────────┐
+│  API (FastAPI/Python)               │
+│  1. Recebe requisição               │
+│  2. Carrega modelo ML treinado      │
+│  3. Processa dados                  │
+│  4. Faz previsão                    │
+└────────┬────────────────────────────┘
+         │
+         │ {
+         │   "previsao_atraso": 0,
+         │   "probabilidade_atraso": 0.29
+         │ }
+         ▼
+┌─────────────────────────────────────┐
+│  FRONT-END (result.js)              │
+│  1. Recebe resposta                 │
+│  2. Converte para texto             │
+│     • 0 → "Pontual"                 │
+│     • 0.29 → "29% de chance"        │
+│  3. Exibe resultado                 │
+└────────┬────────────────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│   USUÁRIO       │
+│  Vê resultado:  │
+│  "Pontual"      │
+│  "29% atraso"   │
+└─────────────────┘
+```
+
+**Importante:** 
+- O modelo de ML já foi **treinado previamente** com dados históricos
+- O modelo treinado está **salvo em arquivo** no repositório da API
+- A API **carrega o modelo** quando inicia (não busca dados do GitHub em tempo real)
+- Cada previsão usa o **conhecimento já aprendido** pelo modelo
+
 ### ⚙️ Como Funciona
 
 #### Modo Automático (Recomendado)
