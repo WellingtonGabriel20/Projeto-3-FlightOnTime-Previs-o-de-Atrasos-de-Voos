@@ -62,6 +62,131 @@ pontuau-landing/
 └── README.md           # Este arquivo
 ```
 
+## 🔌 Integração com API de Machine Learning
+
+A calculadora de previsão está integrada com a API real de Machine Learning desenvolvida pela equipe.
+
+### 📡 Repositório da API
+
+```
+https://github.com/Bruno-BandeiraH/flight-prediction-model
+```
+
+### ⚙️ Como Funciona
+
+#### Modo Automático (Recomendado)
+
+A calculadora detecta automaticamente o ambiente e se adapta:
+
+- **Desenvolvimento Local**: Tenta conectar em `http://localhost:8000`
+- **API Indisponível**: Usa dados simulados automaticamente (modo demonstração)
+- **Produção**: Usa URL configurada (quando API estiver deployada)
+
+#### Mapeamentos Automáticos
+
+A API usa códigos **ICAO** (aviação civil), mas o formulário usa códigos **IATA** (comerciais). A conversão é automática:
+
+**Companhias Aéreas:**
+- `G3` (Gol) → `GLO`
+- `AD` (Azul) → `AZU`
+- `LA` (LATAM) → `TAM`
+- `TP` (TAP) → `TAP`
+
+**Aeroportos:**
+- `GRU` (Guarulhos) → `SBGR`
+- `GIG` (Galeão) → `SBGL`
+- `BSB` (Brasília) → `SBBR`
+- `CGH` (Congonhas) → `SBSP`
+- `SDU` (Santos Dumont) → `SBRJ`
+- E outros...
+
+#### Cálculos Automáticos
+
+- **Tempo de Voo**: Calculado automaticamente baseado na distância (velocidade média: 800 km/h)
+- **Formato de Data**: Convertido automaticamente para o formato da API
+
+### 🚀 Rodando a API Localmente
+
+Para testar com a API real em desenvolvimento:
+
+```bash
+# 1. Clone o repositório da API
+git clone https://github.com/Bruno-BandeiraH/flight-prediction-model.git
+cd flight-prediction-model
+
+# 2. Rode com Docker (recomendado)
+docker build -t flight-prediction-model .
+docker run -p 8000:8000 flight-prediction-model
+
+# 3. API disponível em: http://localhost:8000
+# Swagger docs: http://localhost:8000/docs
+```
+
+### 🌐 Configurando URL de Produção
+
+Quando a API for deployada, atualize a URL em `calculator.js`:
+
+```javascript
+// Linha 24 do calculator.js
+const API_CONFIG = {
+    development: 'http://localhost:8000',
+    production: 'https://SUA-URL-AQUI.com'  // ← Altere aqui
+};
+```
+
+### 📋 Formato da Requisição
+
+**Endpoint:** `POST /predict`
+
+```json
+{
+  "icao_empresa": "AZU",
+  "icao_aerodromo_origem": "SBRF",
+  "icao_aerodromo_destino": "SBRJ",
+  "partida_prevista": "12-11-2025T22:30:00",
+  "tempo_voo_estimado_hr": 1.2,
+  "distancia_km": 50.0
+}
+```
+
+### 📋 Formato da Resposta
+
+```json
+{
+  "previsao_atraso": 0,
+  "probabilidade_atraso": 0.29
+}
+```
+
+- `previsao_atraso`: `0` = Pontual, `1` = Atrasado
+- `probabilidade_atraso`: Valor entre 0.0 e 1.0
+
+### 🔍 Troubleshooting
+
+**Problema:** "Modo de Demonstração" aparece na página de resultado
+
+**Solução:** A API não está rodando. Verifique:
+1. Docker está rodando?
+2. Container da API está ativo? (`docker ps`)
+3. API está respondendo em `http://localhost:8000/docs`?
+
+**Problema:** Erro de CORS
+
+**Solução:** A API já tem CORS configurado. Se o erro persistir, verifique se está acessando via `http://` e não `file://`
+
+**Problema:** Erro 404 - Endpoint não encontrado
+
+**Solução:** Verifique se a API está na versão correta e o endpoint é `/predict`
+
+### 📝 Logs do Console
+
+Abra o Console do navegador (F12) para ver logs detalhados:
+- 🚀 Ambiente detectado
+- 📡 URL da API
+- 📤 Dados enviados
+- 📥 Resposta recebida
+- ⚠️ Avisos e erros
+
 ## 🚀 Como Executar
 
 ### Landing Page
