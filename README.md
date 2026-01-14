@@ -32,6 +32,31 @@ O projeto utiliza modelos de classificação binária treinados com dados histó
 - Digite o comando: ```docker-compose up --build``` e o sistema vai estar no ar (Portas - Spring:```8081```, MySQL:```3307```, fastAPI:```5000```)
 - Abra seu navegador e digite ```http://localhost:8080/swagger-ui.html``` para testar os endpoints
 
+
+## Exemplo de requisição POST no endpoint /predict
+A variável ```previsao_atraso``` retorna 0 (pontual) ou 1 (atrasado).
+
+
+Requisição: 
+```JSON
+{
+  "icao_empresa": "AZU",  
+  "icao_aerodromo_origem": "SBRF", 
+  "icao_aerodromo_destino": "SBRJ", 
+  "partida_prevista": "2025-11-12T22:30:00",  
+  "tempo_voo_estimado_hr": 1.2,  
+  "distancia_km": 50.0  
+}
+```
+
+Resposta: 
+```JSON
+{
+    "previsao_atraso": 0, 
+    "probabilidade_atraso": 0.29
+}
+```
+
 ## Estrutura do projeto
 ```
 PontUau/
