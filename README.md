@@ -123,6 +123,22 @@ PontUau/
 └── docker-compose.yml
 ```
 
+## Development Team
+
+<div align="center">
+
+  <a href="https://github.com/seu-usuario">
+    <img src="https://github.com/Bruno-BandeiraH.png" width="150px;" alt="Foto do Seu Nome"/><br>
+    <b>Bruno Bandeira</b>
+  </a>
+
+  <a href="https://github.com/colega1">
+    <img src="https://github.com/Rafael-LynX.png" width="150px;" alt="Foto do Colega"/><br>
+    <b>Rafael Vieira</b>
+  </a>
+
+</div>
+
 ## Technologies
 - Backend: Spring Boot 4, fastAPI
 - Language: Java 21
