@@ -125,6 +125,8 @@ PontUau/
 
 ## Development Team
 
+### Backend
+
 <table align="center">
   <tr>
     <td align="center">
@@ -145,6 +147,13 @@ PontUau/
         <sub><b>Richard Freitas</b></sub>
       </a>
     </td>
+  </tr>
+</table>
+
+### Data Science
+
+<table align="center">
+  <tr>
     <td align="center">
       <a href="https://github.com/gabriel-schineider">
         <img src="https://github.com/gabriel-schineider.png" width="150px;" alt="Foto de Gabriel Schineider"/><br>
@@ -165,18 +174,19 @@ PontUau/
     </td>
     <td align="center">
       <a href="https://github.com/Cristiano">
-        <img src="https://github.com/Rs.png" width="150px;" alt="Foto de Cristiano Silveira"/><br>
+        <img src="https://github.com/.png" width="150px;" alt="Foto de Cristiano Silveira"/><br>
         <sub><b>Cristiano Silveira</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/arley">
-        <img src="https://github.com/Rrs.png" width="150px;" alt="Foto de Arley Ribeiro"/><br>
+        <img src="https://github.com/.png" width="150px;" alt="Foto de Arley Ribeiro"/><br>
         <sub><b>Arley Ribeiro</b></sub>
       </a>
     </td>
   </tr>
 </table>
+
 
 ## Technologies
 - Backend: Spring Boot 4, fastAPI
