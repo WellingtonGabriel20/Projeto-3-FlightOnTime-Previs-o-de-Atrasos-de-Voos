@@ -169,8 +169,6 @@ document.getElementById('predictionForm').addEventListener('submit', async funct
 
         // Verifica se a resposta foi bem-sucedida
         if (!response.ok) {
-            const erroDetail = await response.text();
-            console.error("Detalhe do erro no spring: ", erroDetail);
             throw new Error(`Erro HTTP ${response.status}: ${response.statusText}`);
         }
 
@@ -209,23 +207,23 @@ document.getElementById('predictionForm').addEventListener('submit', async funct
         // Se a API não estiver disponível, usa dados simulados
         // Isso permite que a calculadora funcione mesmo sem a API deployada
 
-        // const simulatedResponse = {
-        //     previsao: Math.random() > 0.5 ? 'Pontual' : 'Atrasado',
-        //     probabilidade: parseFloat(Math.random().toFixed(2))
-        // };
-        //
-        // console.log('🎲 Usando dados simulados:', simulatedResponse);
-        // console.log('💡 Para usar a API real, certifique-se de que ela está rodando');
-        //
-        // // Armazena dados simulados
-        // sessionStorage.setItem('requestData', JSON.stringify(apiRequest));
-        // sessionStorage.setItem('responseData', JSON.stringify(simulatedResponse));
-        // sessionStorage.setItem('isSimulated', 'true'); // Flag para indicar simulação
-        //
-        // // Redireciona para página de resultado
-        // window.location.href = 'result.html';
+        const simulatedResponse = {
+            previsao: Math.random() > 0.5 ? 'Pontual' : 'Atrasado',
+            probabilidade: parseFloat(Math.random().toFixed(2))
+        };
+
+        console.log('🎲 Usando dados simulados:', simulatedResponse);
+        console.log('💡 Para usar a API real, certifique-se de que ela está rodando');
+
+        // Armazena dados simulados
+        sessionStorage.setItem('requestData', JSON.stringify(apiRequest));
+        sessionStorage.setItem('responseData', JSON.stringify(simulatedResponse));
+        sessionStorage.setItem('isSimulated', 'true'); // Flag para indicar simulação
+
+        // Redireciona para página de resultado
+        window.location.href = 'result.html';
     }
-});
+ });
 
 // ==========================================
 // AUTO-PREENCHIMENTO DE DISTÂNCIA
