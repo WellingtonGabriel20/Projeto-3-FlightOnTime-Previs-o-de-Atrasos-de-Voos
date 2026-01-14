@@ -28,7 +28,7 @@ PontUau is a flight punctuality prediction system that uses machine learning and
 ## How to use:
 - Open the terminal on the root of the project
 - Enter the command: ```docker-compose up --build```
-- Open your browser and type ```http://localhost:8080/swagger-ui.html```
+- Open your browser and type ```http://localhost:8080/swagger-ui.html``` to test the endpoints
 
 ## Project Structure
 ```
