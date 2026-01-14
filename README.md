@@ -188,7 +188,7 @@ flight-prediction-model/
     </td>
     <td align="center">
       <a href="https://github.com/realcsilveira">
-        <img src="https://github.com/.png" width="150px;" alt="Foto de Cristiano Silveira"/><br>
+        <img src="https://github.com/realcsilveira.png" width="150px;" alt="Foto de Cristiano Silveira"/><br>
         <sub><b>Cristiano Silveira</b></sub>
       </a>
     </td>
