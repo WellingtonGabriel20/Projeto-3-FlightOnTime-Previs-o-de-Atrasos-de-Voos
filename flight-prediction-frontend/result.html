@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resultado da Previsão de Atraso - PontUau">
+    <title>Resultado da Previsão - PontUau</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="Imagens/arara selvagem.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="calculator.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="Imagens/arara selvagem.jpg" alt="Araras Selvagens" class="logo-image">
+                <div class="logo-text">
+                    <span class="gradient-text">PontUau</span>
+                    <span class="team-name">Equipe Araras Selvagens</span>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="index.html#home">Início</a>
+                <a href="index.html#parceiros">Parceiros</a>
+                <a href="index.html#equipe">Equipe</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Result Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-header">
+                <a href="calculator.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Nova Consulta</span>
+                </a>
+                <h1 class="page-title page-title-small">
+                    <span class="gradient-text">Resultado da Previsão</span>
+                </h1>
+                <p class="page-subtitle">
+                    Análise completa baseada nos dados fornecidos
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <!-- Result Display -->
+                <div class="calculator-result">
+                    <div class="result-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Previsão do Voo</h3>
+                    </div>
+
+                    <div class="result-status" id="resultStatus">
+                        <div class="status-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="status-info">
+                            <span class="status-label">Status Previsto</span>
+                            <span class="status-value" id="statusValue">-</span>
+                        </div>
+                    </div>
+
+                    <div class="probability-container">
+                        <div class="probability-label">
+                            <span>Probabilidade de Atraso</span>
+                            <span class="probability-value" id="probabilityValue">-</span>
+                        </div>
+                        <div class="probability-bar">
+                            <div class="probability-fill" id="probabilityBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="result-insights">
+                        <h4><i class="fas fa-lightbulb"></i> Informações do Voo</h4>
+                        <div class="insights-grid">
+                            <div class="insight-item">
+                                <i class="fas fa-building"></i>
+                                <div>
+                                    <span class="insight-label">Companhia</span>
+                                    <span class="insight-value" id="companhiaValue">-</span>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <i class="fas fa-route"></i>
+                                <div>
+                                    <span class="insight-label">Rota</span>
+                                    <span class="insight-value" id="rotaValue">-</span>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <i class="fas fa-ruler"></i>
+                                <div>
+                                    <span class="insight-label">Distância</span>
+                                    <span class="insight-value" id="distanciaValue">-</span>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <span class="insight-label">Data/Hora</span>
+                                    <span class="insight-value" id="dataHoraValue">-</span>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <i class="fas fa-calendar-check"></i>
+                                <div>
+                                    <span class="insight-label">Temporada</span>
+                                    <span class="insight-value" id="temporadaValue">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-data">
+                        <h4><i class="fas fa-code"></i> Dados da Requisição (JSON)</h4>
+                        <pre id="requestData">Carregando...</pre>
+                    </div>
+
+                    <div class="result-data">
+                        <h4><i class="fas fa-server"></i> Resposta da API (JSON)</h4>
+                        <pre id="responseData">Carregando...</pre>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="calculator.html" class="new-calculation">
+                            <i class="fas fa-redo"></i>
+                            <span>Nova Consulta</span>
+                        </a>
+                        <a href="index.html" class="home-button">
+                            <i class="fas fa-home"></i>
+                            <span>Voltar ao Início</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="gradient-text">PontUau</h3>
+                    <p>Previsão inteligente baseada em Machine Learning</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PontUau - Equipe Araras Selvagens</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="result.js"></script>
+</body>
+
+</html>
