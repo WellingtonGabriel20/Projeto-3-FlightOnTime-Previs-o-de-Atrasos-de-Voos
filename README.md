@@ -294,7 +294,7 @@ Para executar o projeto completo com back-end e modelo de ML, consulte os reposi
 | **Rafael Vieira** | Back-end Developer | [@Rafael-LynX](https://github.com/Rafael-LynX) | [LinkedIn](https://www.linkedin.com/in/rafaelvieira-cyber/) |
 | **Richard Silva** | Back-end Developer | [@RichardFFreitas](https://github.com/RichardFFreitas) | [LinkedIn](https://www.linkedin.com/in/richard-freitas-dev/) |
 | **Juciano Gomes** | Back-end Developer | [@Jucianogp](https://github.com/Jucianogp) | [LinkedIn](https://www.linkedin.com/in/juciano-gomes-921830282) |
-| **Matheus Vinícius** | Back-end Developer | - | - |
+
 
 ## 🎯 Objetivos do Projeto
 
