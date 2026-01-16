@@ -1,36 +1,241 @@
+
 # 🛫 PontUau - Previsão Inteligente de Atraso de Voos
 
-![MVP Hackathon](https://img.shields.io/badge/MVP-Hackathon%20Alura%20%2B%20No%20Country-blueviolet)
-![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Python-blue)
-![Backend](https://img.shields.io/badge/Backend-Java%20Spring-green)
-![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
+PontUau é um sistema de previsão de atrasos de voos baseado em Machine Learning, desenvolvido pela equipe Araras Selvagens durante o Hackathon promovido pela Alura em parceria com a No Country.
 
-## 📋 Sobre o Projeto
+O projeto utiliza modelos de classificação binária treinados com dados históricos reais de voos nacionais para determinar se um voo será Pontual ou Atrasado, fornecendo a probabilidade estimada da previsão e contando com recursos de análise de banco de dados.
 
-**PontUau** é uma solução completa de previsão de atrasos de voos baseada em Machine Learning, desenvolvida pela equipe **Araras Selvagens** durante o Hackathon promovido pela **Alura** em parceria com a **No Country**.
+## Objetivos Principais
+- Prever atrasos de voos com antecedência
+- Identificar padrões de pontualidade por companhia aérea
+- Analisar estatísticas históricas de rotas específicas
+- Fornecer insights para melhoria operacional
 
-O projeto utiliza modelos de classificação binária treinados com dados históricos reais de voos nacionais para determinar se um voo será **Pontual** ou **Atrasado**, fornecendo também a probabilidade estimada da previsão.
+## Endpoints
+![endpoints](./flight-prediction-api/src/main/resources/static/img/endpoints.jpeg)
 
-## 🌐 Demonstração
+## Funcionalidades
+- Prever - Indicar se um voo chegará no horário ou atrasado.
+- Estatísticas - Mostrar quantas previsões foram feitas e quantas resultaram em atrasos ou voos pontuais.
+- Companhias Aéreas - Mostrar a companhia aérea com o maior número de previsões de voos pontuais ou atrasados, por ano ou desde o início.
+- Rotas - Exibir a rota com o maior número de previsões de atrasos ou voos pontuais.
 
-Acesse a landing page do projeto:
+### Requisitos para rodar
+- Docker 29.1.2 or +.
+### Requisitos para desenvolver
+- Java 21 or +;
+- Python 3.12.10 or +;
+- Maven;
 
+## Como Usar:
+- Abra o terminal na raiz do projeto
+- Digite o comando: ```docker-compose up --build``` e o sistema vai estar no ar (Portas - Spring:```8081```, MySQL:```3307```, fastAPI:```5000```)
+- Abra seu navegador e digite ```http://localhost:8080/swagger-ui.html``` para testar os endpoints
+
+
+
+## Exemplo de requisição POST no endpoint /predict
+A variável ```previsao_atraso``` retorna 0 (pontual) ou 1 (atrasado).
+
+Requisição: 
+```JSON
+{
+  "icao_empresa": "AZU",  
+  "icao_aerodromo_origem": "SBRF", 
+  "icao_aerodromo_destino": "SBRJ", 
+  "partida_prevista": "2025-11-12T22:30:00",  
+  "tempo_voo_estimado_hr": 1.2,  
+  "distancia_km": 50.0  
+}
 ```
-file:///C:/Users/wellingtonsilva/.gemini/antigravity/scratch/pontuau-landing/index.html
+
+Resposta: 
+```JSON
+{
+    "previsao_atraso": 0, 
+    "probabilidade_atraso": 0.29
+}
 ```
 
-Ou abra o arquivo `index.html` diretamente no seu navegador.
+## Estrutura do projeto
+```
+PontUau/
+├── flight-prediction-api/  # API Principal
+├── flight-prediction-model/  # fastAPI com o modelo implementado
+├── README.md
+└── docker-compose.yml
+```
 
-## ✨ Funcionalidades
+#### flight-prediction-api
+```
+flight-prediction-api/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── com/
+│   │   │       ├── flightontime/
+│   │   │           ├── api/
+│   │   │               ├── config/
+│   │   │               │   ├── CorsConfig.java
+│   │   │               │   └── WebClientConfig.java
+│   │   │               ├── controller/
+│   │   │               │   ├── FlightController.java
+│   │   │               │   └── PredictionController.java
+│   │   │               ├── domain/
+│   │   │               │   ├── Flight.java
+│   │   │               │   └── FlightRepository.java
+│   │   │               ├── dto/
+│   │   │               │   ├── AirlineDelayedData.java
+│   │   │               │   ├── AirlineOnTimeData.java
+│   │   │               │   ├── FlightDTO.java
+│   │   │               │   ├── PredictionRequestDTO.java
+│   │   │               │   ├── PredictionResponseDTO.java
+│   │   │               │   ├── RouteDelayedData.java
+│   │   │               │   ├── RouteOnTimeData.java
+│   │   │               │   ├── StatisticsByYearData.java
+│   │   │               │   └── StatisticsData.java
+│   │   │               ├── infra/
+│   │   │               │   ├── exception/
+│   │   │               │   │   ├── ResourceNotFoundException.java
+│   │   │               │   │   └── RestExceptionHandler.java
+│   │   │               │   ├── validations/
+│   │   │               │   │   ├── time/
+│   │   │               │   │   │   └── ExpectedTime.java
+│   │   │               │   │   └── RepositoryValidator.java
+│   │   │               │   └── ValidatorException.java
+│   │   │               ├── service/
+│   │   │               │   ├── FlightService.java
+│   │   │               │   └── PredictionService.java
+│   │   │               └── FlightPredictionApiApplication.java
+│   │   ├── resources/
+│   │       ├── static/
+│   │       │   ├── img/
+│   │       │       └── endpoint.png
+│   │       ├── templates/
+│   │       └── application.properties
+│   ├── test/
+│       ├── java/
+│           ├── com/
+│               ├── flightontime/
+│                   ├── api/
+│                       ├── controller/
+│                       │   └── PredictionControllerTest.java
+│                       ├── domain/
+│                       │   └── FlightTest.java
+│                       ├── infra/
+│                       │   ├── validations/
+│                       │       ├── time/
+│                       │           └── ExpectedTimeTest.java
+│                       ├── service/
+│                       │   └── PredictionServiceTest.java
+│                       └── FlightPredictionApiApplicationTests.java
+├── Dockerfile
+├── README.md
+├── mvnw
+├── mvnw.cmd
+└── pom.xml
+```
 
-- 🤖 **Modelo de Classificação**: Sistema de classificação binária (Pontual/Atrasado)
-- 📊 **Probabilidade Associada**: Retorna a probabilidade estimada da previsão
-- 📈 **Dados Históricos**: Treinamento baseado em dados reais de voos nacionais
-- 🔌 **API REST**: Arquitetura preparada para integração com Spring Boot
-- 🎨 **Interface Moderna**: Landing page responsiva com design premium
-- 🧪 **Simulação Interativa**: Demonstração do funcionamento do modelo
+#### flight-prediction-model
+```
+flight-prediction-model/
+├── app/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── config/
+│   │   ├── __init__.py
+│   │   └── settings.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── schemas.py
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── feature_engineering.py
+│   │   └── prediction_service.py
+│   ├── __init__.py
+│   └── main.py
+├── model/
+│   └── modelo_previsao_atraso_voos_v2.pkl
+├── Dockerfile
+├── README.md
+└── requirements.txt
+```
 
-## 🛠️ Tecnologias Utilizadas
+## Araras Selvagens
+
+### Backend
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Bruno-BandeiraH">
+        <img src="https://github.com/Bruno-BandeiraH.png" width="150px;" alt="Foto de Bruno Bandeira"/><br>
+        <sub><b>Bruno Bandeira</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Rafael-LynX">
+        <img src="https://github.com/Rafael-LynX.png" width="150px;" alt="Foto de Rafael Vieira"/><br>
+        <sub><b>Rafael Vieira</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/RichardFFreitas">
+        <img src="https://github.com/RichardFFreitas.png" width="150px;" alt="Foto de Richard Freitas"/><br>
+        <sub><b>Richard Freitas</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+### Data Science
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/gabriel-schineider">
+        <img src="https://github.com/gabriel-schineider.png" width="150px;" alt="Foto de Gabriel Schineider"/><br>
+        <sub><b>Gabriel Schineider</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/GleiceAraujo22">
+        <img src="https://github.com/GleiceAraujo22.png" width="150px;" alt="Foto de Gleice Araújo"/><br>
+        <sub><b>Gleice Araújo</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/WellingtonGabriel20">
+        <img src="https://github.com/WellingtonGabriel20.png" width="150px;" alt="Foto de Richard Freitas"/><br>
+        <sub><b>Wellington Silva</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/realcsilveira">
+        <img src="https://github.com/realcsilveira.png" width="150px;" alt="Foto de Cristiano Silveira"/><br>
+        <sub><b>Cristiano Silveira</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+### Repositórios anteriores:
+- [API Principal](https://github.com/Bruno-BandeiraH/flight-on-time-api)
+- [API integrando o modelo de ML](https://github.com/Bruno-BandeiraH/flight-prediction-model/)
+- [Data Science](https://github.com/gabriel-schineider/flight-on-time-API-Data_Science_Team/)
+
+
+## Tecnologias
+
+### Backend
+- Frameworks: Spring Boot, fastAPI
+- Lingaigens: Java, Python
+- Banco de dados: MySQL
+- Documentação: SpringDoc
+- Testes: JUnit 5, Mockito
+- Versionamento: Git, GitHub
+- Build: Maven
 
 ### Data Science
 - Python
@@ -38,311 +243,3 @@ Ou abra o arquivo `index.html` diretamente no seu navegador.
 - scikit-learn
 - Jupyter Notebook
 - Modelagem supervisionada
-
-### Back-end
-- Java
-- Spring Boot
-- APIs REST
-- Persistência de dados
-
-### Front-end (Landing Page)
-- HTML5
-- CSS3 (Vanilla CSS)
-- JavaScript
-- Google Fonts (Inter, Poppins)
-- Font Awesome
-
-## 📁 Estrutura do Projeto
-
-```
-pontuau-landing/
-├── index.html          # Página principal
-├── styles.css          # Estilos da landing page
-├── Imagens/            # Assets e imagens
-└── README.md           # Este arquivo
-```
-
-## 🔌 Integração com API de Machine Learning
-
-A calculadora de previsão está integrada com a API real de Machine Learning desenvolvida pela equipe.
-
-### 📡 Repositório da API
-
-```
-https://github.com/Bruno-BandeiraH/flight-prediction-model
-```
-
-### 🔄 Fluxo de Dados Completo
-
-Entenda como funciona o processo desde o preenchimento do formulário até a exibição do resultado:
-
-```
-┌─────────────────┐
-│   USUÁRIO       │
-│  Preenche form  │
-│  (Azul, GRU→GIG)│
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────────────────────────┐
-│  FRONT-END (calculator.js)          │
-│  1. Coleta dados do formulário      │
-│  2. Converte IATA → ICAO            │
-│     • Azul (AD) → AZU               │
-│     • GRU → SBGR, GIG → SBGL        │
-│  3. Calcula tempo de voo            │
-│  4. Formata data/hora               │
-└────────┬────────────────────────────┘
-         │
-         │ POST /predict
-         │ {
-         │   "icao_empresa": "AZU",
-         │   "icao_aerodromo_origem": "SBGR",
-         │   "icao_aerodromo_destino": "SBGL",
-         │   "partida_prevista": "12-11-2025T22:30:00",
-         │   "tempo_voo_estimado_hr": 0.44,
-         │   "distancia_km": 350.0
-         │ }
-         ▼
-┌─────────────────────────────────────┐
-│  API (FastAPI/Python)               │
-│  1. Recebe requisição               │
-│  2. Carrega modelo ML treinado      │
-│  3. Processa dados                  │
-│  4. Faz previsão                    │
-└────────┬────────────────────────────┘
-         │
-         │ {
-         │   "previsao_atraso": 0,
-         │   "probabilidade_atraso": 0.29
-         │ }
-         ▼
-┌─────────────────────────────────────┐
-│  FRONT-END (result.js)              │
-│  1. Recebe resposta                 │
-│  2. Converte para texto             │
-│     • 0 → "Pontual"                 │
-│     • 0.29 → "29% de chance"        │
-│  3. Exibe resultado                 │
-└────────┬────────────────────────────┘
-         │
-         ▼
-┌─────────────────┐
-│   USUÁRIO       │
-│  Vê resultado:  │
-│  "Pontual"      │
-│  "29% atraso"   │
-└─────────────────┘
-```
-
-**Importante:** 
-- O modelo de ML já foi **treinado previamente** com dados históricos
-- O modelo treinado está **salvo em arquivo** no repositório da API
-- A API **carrega o modelo** quando inicia (não busca dados do GitHub em tempo real)
-- Cada previsão usa o **conhecimento já aprendido** pelo modelo
-
-### ⚙️ Como Funciona
-
-#### Modo Automático (Recomendado)
-
-A calculadora detecta automaticamente o ambiente e se adapta:
-
-- **Desenvolvimento Local**: Tenta conectar em `http://localhost:8000`
-- **API Indisponível**: Usa dados simulados automaticamente (modo demonstração)
-- **Produção**: Usa URL configurada (quando API estiver deployada)
-
-#### Mapeamentos Automáticos
-
-A API usa códigos **ICAO** (aviação civil), mas o formulário usa códigos **IATA** (comerciais). A conversão é automática:
-
-**Companhias Aéreas:**
-- `G3` (Gol) → `GLO`
-- `AD` (Azul) → `AZU`
-- `LA` (LATAM) → `TAM`
-- `TP` (TAP) → `TAP`
-
-**Aeroportos:**
-- `GRU` (Guarulhos) → `SBGR`
-- `GIG` (Galeão) → `SBGL`
-- `BSB` (Brasília) → `SBBR`
-- `CGH` (Congonhas) → `SBSP`
-- `SDU` (Santos Dumont) → `SBRJ`
-- E outros...
-
-#### Cálculos Automáticos
-
-- **Tempo de Voo**: Calculado automaticamente baseado na distância (velocidade média: 800 km/h)
-- **Formato de Data**: Convertido automaticamente para o formato da API
-
-### 🚀 Rodando a API Localmente
-
-Para testar com a API real em desenvolvimento:
-
-```bash
-# 1. Clone o repositório da API
-git clone https://github.com/Bruno-BandeiraH/flight-prediction-model.git
-cd flight-prediction-model
-
-# 2. Rode com Docker (recomendado)
-docker build -t flight-prediction-model .
-docker run -p 8000:8000 flight-prediction-model
-
-# 3. API disponível em: http://localhost:8000
-# Swagger docs: http://localhost:8000/docs
-```
-
-### 🌐 Configurando URL de Produção
-
-Quando a API for deployada, atualize a URL em `calculator.js`:
-
-```javascript
-// Linha 24 do calculator.js
-const API_CONFIG = {
-    development: 'http://localhost:8000',
-    production: 'https://SUA-URL-AQUI.com'  // ← Altere aqui
-};
-```
-
-### 📋 Formato da Requisição
-
-**Endpoint:** `POST /predict`
-
-```json
-{
-  "icao_empresa": "AZU",
-  "icao_aerodromo_origem": "SBRF",
-  "icao_aerodromo_destino": "SBRJ",
-  "partida_prevista": "12-11-2025T22:30:00",
-  "tempo_voo_estimado_hr": 1.2,
-  "distancia_km": 50.0
-}
-```
-
-### 📋 Formato da Resposta
-
-```json
-{
-  "previsao_atraso": 0,
-  "probabilidade_atraso": 0.29
-}
-```
-
-- `previsao_atraso`: `0` = Pontual, `1` = Atrasado
-- `probabilidade_atraso`: Valor entre 0.0 e 1.0
-
-### 🔍 Troubleshooting
-
-**Problema:** "Modo de Demonstração" aparece na página de resultado
-
-**Solução:** A API não está rodando. Verifique:
-1. Docker está rodando?
-2. Container da API está ativo? (`docker ps`)
-3. API está respondendo em `http://localhost:8000/docs`?
-
-**Problema:** Erro de CORS
-
-**Solução:** A API já tem CORS configurado. Se o erro persistir, verifique se está acessando via `http://` e não `file://`
-
-**Problema:** Erro 404 - Endpoint não encontrado
-
-**Solução:** Verifique se a API está na versão correta e o endpoint é `/predict`
-
-### 📝 Logs do Console
-
-Abra o Console do navegador (F12) para ver logs detalhados:
-- 🚀 Ambiente detectado
-- 📡 URL da API
-- 📤 Dados enviados
-- 📥 Resposta recebida
-- ⚠️ Avisos e erros
-
-## 🚀 Como Executar
-
-### Landing Page
-
-1. Clone ou baixe o repositório
-2. Navegue até a pasta do projeto
-3. Abra o arquivo `index.html` no seu navegador preferido
-
-```bash
-# Ou use um servidor local
-python -m http.server 8000
-# Acesse: http://localhost:8000
-```
-
-### Projeto Completo
-
-Para executar o projeto completo com back-end e modelo de ML, consulte os repositórios específicos da equipe.
-
-## 👥 Equipe Araras Selvagens
-
-### Data Science
-
-| Nome | Função | GitHub | LinkedIn |
-|------|--------|--------|----------|
-| **Gabriel Schineider** | Data Scientist | [@gabriel-schineider](https://github.com/gabriel-schineider/) | [LinkedIn](https://www.linkedin.com/in/gabriel-schineider/) |
-| **Gleice Araújo** | Data Scientist | [@GleiceAraujo22](https://github.com/GleiceAraujo22) | [LinkedIn](https://www.linkedin.com/in/gleicearaujo/) |
-| **Wellington Gabriel** | Data Scientist | [@WellingtonGabriel20](https://github.com/WellingtonGabriel20) | [LinkedIn](https://www.linkedin.com/in/wellingtongabriel20) |
-| **Cristiano Silveira** | Data Scientist | [@realcsilveira](https://github.com/realcsilveira) | [LinkedIn](https://www.linkedin.com/in/realcsilveira) |
-| **Arley Ribeiro** | Data Scientist | [@ribeiroarley](https://github.com/ribeiroarley) | [LinkedIn](https://www.linkedin.com/in/ribeiroarley) |
-
-### Back-end Development
-
-| Nome | Função | GitHub | LinkedIn |
-|------|--------|--------|----------|
-| **Bruno Henrique** | Back-end Developer | [@Bruno-bandeirah](https://github.com/Bruno-bandeirah) | [LinkedIn](https://www.linkedin.com/in/bruno-bandeira-dev/) |
-| **Rafael Vieira** | Back-end Developer | [@Rafael-LynX](https://github.com/Rafael-LynX) | [LinkedIn](https://www.linkedin.com/in/rafaelvieira-cyber/) |
-| **Richard Silva** | Back-end Developer | [@RichardFFreitas](https://github.com/RichardFFreitas) | [LinkedIn](https://www.linkedin.com/in/richard-freitas-dev/) |
-| **Juciano Gomes** | Back-end Developer | [@Jucianogp](https://github.com/Jucianogp) | [LinkedIn](https://www.linkedin.com/in/juciano-gomes-921830282) |
-
-
-## 🎯 Objetivos do Projeto
-
-1. **Educacional**: Aplicar conceitos avançados de Data Science e Engenharia de Software
-2. **Prático**: Desenvolver uma solução real para um problema do setor aéreo
-3. **Colaborativo**: Trabalhar em equipe multidisciplinar (Data Science + Back-end)
-4. **Profissional**: Seguir boas práticas de desenvolvimento e documentação
-
-## 🔮 Próximos Passos
-
-- [ ] Integração completa do modelo ML com a API REST
-- [ ] Deploy da aplicação em ambiente de produção
-- [ ] Implementação de mais features de análise preditiva
-- [ ] Dashboard administrativo para visualização de métricas
-- [ ] Testes automatizados (unitários e integração)
-- [ ] Documentação técnica completa da API
-
-## 📊 Insights do Modelo
-
-O modelo considera diversos fatores para realizar a previsão:
-
-- ✅ Análise baseada em dados históricos
-- ✅ Padrões de tráfego aéreo identificados
-- ✅ Fatores sazonais considerados
-- ✅ Rotas e horários de maior incidência
-
-## 🤝 Contribuindo
-
-Este é um projeto educacional desenvolvido durante um hackathon. Sugestões e feedbacks são bem-vindos!
-
-## 📄 Licença
-
-© 2026 PontUau - Equipe Araras Selvagens. Todos os direitos reservados.
-
-Projeto desenvolvido durante o Hackathon Alura + No Country.
-
-## 🏆 Agradecimentos
-
-- **Alura**: Pela organização do hackathon e suporte educacional
-- **No Country**: Pela parceria e oportunidade de aprendizado
-- **Equipe Araras Selvagens**: Pela dedicação e trabalho em equipe
-
----
-
-<div align="center">
-
-**Desenvolvido com 💜 pela Equipe Araras Selvagens**
-
-[🏠 Início](#-pontuau---previsão-inteligente-de-atraso-de-voos) • [📋 Sobre](#-sobre-o-projeto) • [👥 Equipe](#-equipe-araras-selvagens)
-
-</div>
