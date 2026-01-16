@@ -177,9 +177,35 @@ document.getElementById('predictionForm').addEventListener('submit', async funct
             body: JSON.stringify(apiRequest)
         });
 
-        // Verifica se a resposta foi bem-sucedida
+        // ==========================================
+        // TRATAMENTO DE ERROS DA API
+        // ==========================================
         if (!response.ok) {
-            throw new Error(`Erro HTTP ${response.status}: ${response.statusText}`);
+            // Tenta extrair mensagem de erro da API
+            let errorData;
+            try {
+                errorData = await response.json();
+            } catch (e) {
+                // Se não conseguir parsear JSON, usa erro genérico
+                errorData = {
+                    field: 'generic',
+                    message: `Erro HTTP ${response.status}: ${response.statusText}`
+                };
+            }
+
+            console.error('❌ Erro da API:', errorData);
+
+            // Usa o error-handler para exibir erro amigável
+            const alertContainer = document.querySelector('.calculator-container');
+            const form = document.getElementById('predictionForm');
+
+            await handleApiError(response, errorData, alertContainer, form);
+
+            // Restaura botão
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+
+            return; // Para a execução aqui
         }
 
         // Extrai JSON da resposta
@@ -192,9 +218,27 @@ document.getElementById('predictionForm').addEventListener('submit', async funct
         // API retorna: { previsao_atraso: 0 ou 1, probabilidade_atraso: 0.0-1.0 }
         // Front-end espera: { previsao: "Pontual" ou "Atrasado", probabilidade: 0.0-1.0 }
 
+        // Validação de consistência: garante que a classificação corresponda à probabilidade
+        let previsao;
+        const probabilidade = apiResponse.probabilidade_atraso;
+
+        // Se a probabilidade de atraso é > 0.5, deve ser "Atrasado"
+        // Se a probabilidade de atraso é <= 0.5, deve ser "Pontual"
+        if (probabilidade > 0.5) {
+            previsao = 'Atrasado';
+            if (apiResponse.previsao_atraso === 0) {
+                console.warn('⚠️ Inconsistência detectada: API retornou Pontual mas probabilidade indica Atrasado. Corrigindo...');
+            }
+        } else {
+            previsao = 'Pontual';
+            if (apiResponse.previsao_atraso === 1) {
+                console.warn('⚠️ Inconsistência detectada: API retornou Atrasado mas probabilidade indica Pontual. Corrigindo...');
+            }
+        }
+
         const frontendResponse = {
-            previsao: apiResponse.previsao_atraso === 0 ? 'Pontual' : 'Atrasado',
-            probabilidade: apiResponse.probabilidade_atraso
+            previsao: previsao,
+            probabilidade: probabilidade
         };
 
         console.log('✅ Previsão:', frontendResponse.previsao);
@@ -216,6 +260,16 @@ document.getElementById('predictionForm').addEventListener('submit', async funct
         // ==========================================
         // Se a API não estiver disponível, usa dados simulados
         // Isso permite que a calculadora funcione mesmo sem a API deployada
+
+        // Exibe aviso de modo simulação
+        const alertContainer = document.querySelector('.calculator-container');
+        showWarningMessage(
+            'API não disponível. Usando modo de demonstração com dados simulados.',
+            alertContainer
+        );
+
+        // Aguarda 2 segundos para o usuário ver o aviso
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
         const simulatedResponse = {
             previsao: Math.random() > 0.5 ? 'Pontual' : 'Atrasado',

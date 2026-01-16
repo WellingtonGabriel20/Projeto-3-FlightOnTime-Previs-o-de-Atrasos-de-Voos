@@ -1,6 +1,26 @@
 // Statistics Page - Data Visualization
 // Load and display insights from the ML model analysis
 
+// ==========================================
+// CONFIGURAÇÃO DA API
+// ==========================================
+
+// URL da API - Altere conforme o ambiente
+const API_CONFIG = {
+    development: 'http://localhost:8080',
+    production: 'https://sua-api-em-producao.com'
+};
+
+// Detecta automaticamente o ambiente
+const IS_DEVELOPMENT = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE_URL = IS_DEVELOPMENT ? API_CONFIG.development : API_CONFIG.production;
+
+console.log(`🚀 Ambiente: ${IS_DEVELOPMENT ? 'DESENVOLVIMENTO' : 'PRODUÇÃO'}`);
+console.log(`📡 API URL: ${API_BASE_URL}`);
+
+// ==========================================
+// DADOS MOCKADOS (FALLBACK)
+// ==========================================
 // Embedded insights data (from ML model analysis - 3,240 simulations)
 const INSIGHTS_DATA = {
     "aeroportos_pontuais": {
@@ -112,20 +132,218 @@ const periodIcons = {
 };
 
 // Load insights data
-function loadInsights() {
+async function loadInsights() {
     try {
-        // Use embedded data (fixes CORS issue with file:// protocol)
-        const data = INSIGHTS_DATA;
+        console.log('📊 Carregando estatísticas...');
 
-        renderAirportRankings(data.aeroportos_pontuais);
-        renderBestTimes(data.melhores_horarios);
-        renderPeriodAnalysis(data.melhores_turnos);
-        renderAirlinePerformance(data.companhias_pontuais);
+        // Tenta buscar dados reais da API
+        const useRealAPI = await tryFetchFromAPI();
+
+        if (useRealAPI) {
+            console.log('✅ Usando dados reais da API');
+        } else {
+            console.log('⚠️ Usando dados mockados (modo demonstração)');
+            // Usa dados mockados
+            const data = INSIGHTS_DATA;
+            renderAirportRankings(data.aeroportos_pontuais);
+            renderBestTimes(data.melhores_horarios);
+            renderPeriodAnalysis(data.melhores_turnos);
+            renderAirlinePerformance(data.companhias_pontuais);
+
+            // Anima as barras de progresso após renderizar
+            setTimeout(() => {
+                animateProgressBars();
+            }, 100);
+        }
 
     } catch (error) {
-        console.error('Erro ao carregar insights:', error);
+        console.error('❌ Erro ao carregar insights:', error);
         showErrorMessage();
     }
+}
+
+/**
+ * Tenta buscar dados da API real
+ * @returns {Promise<boolean>} true se conseguiu buscar da API, false caso contrário
+ */
+async function tryFetchFromAPI() {
+    try {
+        // Testa se a API está disponível com um endpoint simples
+        const testResponse = await fetch(`${API_BASE_URL}/flights/statistics`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!testResponse.ok) {
+            console.warn('⚠️ API retornou erro:', testResponse.status);
+            return false;
+        }
+
+        // Se a API está disponível, busca todos os dados
+        await fetchAllStatistics();
+        return true;
+
+    } catch (error) {
+        console.warn('⚠️ API não disponível:', error.message);
+        return false;
+    }
+}
+
+/**
+ * Busca todas as estatísticas da API
+ */
+async function fetchAllStatistics() {
+    try {
+        // Busca estatísticas gerais
+        const statsResponse = await fetch(`${API_BASE_URL}/flights/statistics`);
+        const stats = await statsResponse.json();
+        console.log('📈 Estatísticas gerais:', stats);
+
+        // Busca rotas pontuais
+        const routesOnTimeResponse = await fetch(`${API_BASE_URL}/flights/routes/ontime`);
+        const routesOnTime = await routesOnTimeResponse.json();
+        console.log('✈️ Rotas pontuais:', routesOnTime);
+
+        // Busca rotas atrasadas
+        const routesDelayedResponse = await fetch(`${API_BASE_URL}/flights/routes/delayed`);
+        const routesDelayed = await routesDelayedResponse.json();
+        console.log('⏰ Rotas atrasadas:', routesDelayed);
+
+        // Busca companhias pontuais
+        const airlinesOnTimeResponse = await fetch(`${API_BASE_URL}/flights/airlines/ontime`);
+        const airlinesOnTime = await airlinesOnTimeResponse.json();
+        console.log('🏆 Companhias pontuais:', airlinesOnTime);
+
+        // Busca companhias atrasadas
+        const airlinesDelayedResponse = await fetch(`${API_BASE_URL}/flights/airlines/delayed`);
+        const airlinesDelayed = await airlinesDelayedResponse.json();
+        console.log('📉 Companhias atrasadas:', airlinesDelayed);
+
+        // Processa e renderiza os dados
+        processAndRenderAPIData({
+            stats,
+            routesOnTime,
+            routesDelayed,
+            airlinesOnTime,
+            airlinesDelayed
+        });
+
+    } catch (error) {
+        console.error('❌ Erro ao buscar estatísticas:', error);
+        throw error;
+    }
+}
+
+/**
+ * Processa dados da API e renderiza na página
+ */
+function processAndRenderAPIData(apiData) {
+    // Processa rotas pontuais para formato de aeroportos
+    const airportData = processRoutesForAirports(apiData.routesOnTime);
+    renderAirportRankings(airportData);
+
+    // Por enquanto, usa dados mockados para horários e períodos
+    // (esses dados não estão disponíveis nos endpoints atuais da API)
+    renderBestTimes(INSIGHTS_DATA.melhores_horarios);
+    renderPeriodAnalysis(INSIGHTS_DATA.melhores_turnos);
+
+    // Processa e renderiza companhias
+    const airlineData = processAirlinesData(apiData.airlinesOnTime, apiData.airlinesDelayed);
+    renderAirlinePerformance(airlineData);
+
+    // Anima as barras de progresso após renderizar
+    setTimeout(() => {
+        animateProgressBars();
+    }, 100);
+}
+
+/**
+ * Processa dados de rotas para formato de aeroportos
+ */
+function processRoutesForAirports(routesOnTime) {
+    // Agrupa por aeroporto de origem e calcula média de pontualidade
+    const airportStats = {};
+
+    routesOnTime.forEach(route => {
+        const origin = route.origin || route.icao_aerodromo_origem;
+        if (!airportStats[origin]) {
+            airportStats[origin] = {
+                totalFlights: 0,
+                onTimeFlights: 0
+            };
+        }
+        airportStats[origin].totalFlights += route.totalFlights || route.total_flights || 1;
+        airportStats[origin].onTimeFlights += route.onTimeCount || route.on_time_count || 1;
+    });
+
+    // Calcula probabilidade de atraso
+    const probabilidades = {};
+    const nomes = {};
+
+    Object.keys(airportStats).forEach(icao => {
+        const stats = airportStats[icao];
+        const onTimeRate = stats.onTimeFlights / stats.totalFlights;
+        probabilidades[icao] = 1 - onTimeRate; // Probabilidade de atraso
+        nomes[icao] = `${airportNames[icao] || icao} (${icao.replace('SB', '')})`;
+    });
+
+    // Ordena e pega top 5
+    const sorted = Object.entries(probabilidades)
+        .sort((a, b) => a[1] - b[1])
+        .slice(0, 5);
+
+    const result = {
+        probabilidade_atraso: {},
+        origem_nome: {}
+    };
+
+    sorted.forEach(([icao, prob]) => {
+        result.probabilidade_atraso[icao] = prob;
+        result.origem_nome[icao] = nomes[icao];
+    });
+
+    return result;
+}
+
+/**
+ * Processa dados de companhias aéreas
+ */
+function processAirlinesData(airlinesOnTime, airlinesDelayed) {
+    const airlineStats = {};
+
+    // Processa companhias pontuais
+    airlinesOnTime.forEach(airline => {
+        const code = airline.airline || airline.icao_empresa;
+        airlineStats[code] = {
+            onTime: airline.onTimeCount || airline.on_time_count || 0,
+            total: airline.totalFlights || airline.total_flights || 1
+        };
+    });
+
+    // Adiciona dados de atrasos
+    airlinesDelayed.forEach(airline => {
+        const code = airline.airline || airline.icao_empresa;
+        if (!airlineStats[code]) {
+            airlineStats[code] = { onTime: 0, total: 0 };
+        }
+        const delayed = airline.delayedCount || airline.delayed_count || 0;
+        airlineStats[code].total = Math.max(airlineStats[code].total,
+            airlineStats[code].onTime + delayed);
+    });
+
+    // Calcula probabilidade de atraso
+    const probabilidades = {};
+    Object.keys(airlineStats).forEach(code => {
+        const stats = airlineStats[code];
+        const onTimeRate = stats.onTime / stats.total;
+        probabilidades[code] = 1 - onTimeRate;
+    });
+
+    return {
+        probabilidade_atraso: probabilidades
+    };
 }
 
 // Render Airport Rankings
