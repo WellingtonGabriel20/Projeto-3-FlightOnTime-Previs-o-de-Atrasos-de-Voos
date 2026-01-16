@@ -68,7 +68,17 @@ const AIRPORT_IATA_TO_ICAO = {
     'SSA': 'SBSV',  // Salvador
     'FOR': 'SBFZ',  // Fortaleza
     'REC': 'SBRF',  // Recife
-    'POA': 'SBPA'   // Porto Alegre
+    'POA': 'SBPA',  // Porto Alegre
+    'CWB': 'SBCT',  // Curitiba
+    'FLN': 'SBFL',  // Florianópolis
+    'BEL': 'SBBE',  // Belém
+    'VCP': 'SBKP',  // Campinas
+    'MCP': 'SBMQ',  // Macapá
+    'MCZ': 'SBMO',  // Maceió
+    'NVT': 'SBNF',  // Navegantes
+    'NAT': 'SBNT',  // Natal
+    'VIX': 'SBVT',  // Vitória
+    'MAO': 'SBEG'   // Manaus
 };
 
 // ==========================================
@@ -223,7 +233,7 @@ document.getElementById('predictionForm').addEventListener('submit', async funct
         // Redireciona para página de resultado
         window.location.href = 'result.html';
     }
- });
+});
 
 // ==========================================
 // AUTO-PREENCHIMENTO DE DISTÂNCIA

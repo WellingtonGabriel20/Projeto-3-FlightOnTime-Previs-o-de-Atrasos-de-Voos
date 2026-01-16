@@ -82,13 +82,13 @@ body {
 /* Calculator Section */
 .calculator-section {
     flex: 1;
-    padding: var(--spacing-3xl) 0;
+    padding: 1.5rem 0;
     background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-card) 100%);
 }
 
 .calculator-header {
     text-align: center;
-    margin-bottom: var(--spacing-3xl);
+    margin-bottom: 1.5rem;
     position: relative;
 }
 
@@ -112,9 +112,9 @@ body {
 
 .page-title {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 0.5rem;
 }
 
 .page-title-small {
@@ -122,7 +122,7 @@ body {
 }
 
 .page-subtitle {
-    font-size: 1.125rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto;
@@ -137,25 +137,25 @@ body {
 .calculator-form {
     background: var(--dark-elevated);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: var(--spacing-2xl);
+    border-radius: 20px;
+    padding: 1.5rem;
 }
 
 .form-section {
-    margin-bottom: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .form-section:last-of-type {
     border-bottom: none;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 1rem;
 }
 
 .form-section h3 {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
     color: var(--text-primary);
     display: flex;
     align-items: center;
@@ -167,7 +167,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 1rem;
 }
 
 .form-group label {
@@ -190,11 +190,11 @@ body {
     width: 100%;
     background: var(--dark-card);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: var(--spacing-md);
+    border-radius: 10px;
+    padding: 0.75rem;
     color: var(--text-primary);
     font-family: var(--font-primary);
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: all var(--transition-normal);
 }
 
@@ -220,10 +220,10 @@ body {
     background: var(--primary-gradient);
     border: none;
     border-radius: 12px;
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: 0.875rem 1.25rem;
     color: var(--text-primary);
     font-family: var(--font-primary);
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -465,7 +465,7 @@ body {
 
 .action-buttons {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: var(--spacing-md);
 }
 
