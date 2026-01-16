@@ -9,7 +9,7 @@ Este projeto, divido em quatro repositórios - Ciência de Dados, Back-End, Fron
 
 Para esse projeto, fizemos uma extensa pesquisa internacional nas mais variadas bases de voos aéreos.
 
-Decidimos utilizar a base de dados da Agência Nacional de Aviação Civil (ANAC), um Orgão Público Oficial do Brasil.
+Decidimos utilizar a base de dados da Agência Nacional de Aviação Civil (**ANAC**), um Orgão Público Oficial do Brasil.
 
 A escolha dessa fonte deve-se, principalmente, à confiabilidade das informações, bem como ao intuito de realizar uma aplicação voltada, exclusivamente, para o mercado brasileiro.
 
@@ -20,7 +20,7 @@ Esse repositório teve como objetivo criar um dataset próprio, a partir de uma 
 
 Utilizamos o período histórico de informações da base de dados escolhida de tal modo que as informações de 2023 e 2024 foram aproveitadas para treinamento do modelo, enquanto as informações de 2025 foram aproveitadas para teste/avaliação realista dele. Assim, pôde-se avaliar a capacidade de generalização do modelo, simulando um cenário real de previsão futura.
 
-Vale ressaltar que esse projeto foi desenvolvido no contexto de um hackathon educacional - organizado pela Oracle em parceria com a Alura e a No Country - com foco em aplicar os conhecimentos e habilidades deselvolvidos ao longo do Programa Oracle Next Education em um cenário real.
+Vale ressaltar que esse projeto foi desenvolvido no contexto de um hackathon educacional - organizado pela **Oracle** em parceria com a **Alura** e a **No Country** - com foco em aplicar os conhecimentos e habilidades deselvolvidos ao longo do **Programa Oracle Next Education** em um cenário real.
 
 
 ## Descrição do repositório - A abordagem do Time de Data Science
@@ -46,8 +46,6 @@ O trabalho de Data Science contemplou:
   - Log Loss
 - Serialização do modelo final escolhido com `joblib`
 - Suporte ao time de Back-End para integração do modelo com a API
-
-Faz-se importante mencionar que o modelo foi treinado com Dados de 
 
 ---
 
